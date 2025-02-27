@@ -1,0 +1,17 @@
+name: Notify Slack on Merge
+
+on:
+  push:
+    branches:
+      - main  # Replace with your target branch (e.g., "develop", "feature-branch")
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send Slack Notification
+        uses: rtCamp/action-slack-notify@v2
+        env:
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+          SLACK_MESSAGE: "🚀 Code merged into *${{ github.ref_name }}* by *${{ github.actor }}*"
+          SLACK_USERNAME: "GitHub Bot"
